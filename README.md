@@ -1,66 +1,44 @@
-# Мини-лабораторная 2, осень 24
-## О чём лаба?
-Лаба про реализацию backend приложения без базы данных, которое обращается к сторонним сервисам по API с помощью HTTP запросов. Необходимо выбрать и выполнить один из трёх вариантов задания, описанных ниже.
+## Introduction
 
-## Первый вариант задания 
-1. Реализовать собственное бэкенд-приложение на любом языке и любом фреймворке, в котором будет использоваться API внешнего сервиса. В приложении должно быть минимум 3 эндпоинта для реализации логики работы сервиса. Наличие БД не обязательно;
-2. Задокументируйте запросы Вашего сервиса в Postman, прикрепите ссылку на workspace в readme.md;
-3. Прописать в readme.md подробную инструкцию по разворачиванию и конфигурации приложения локально. Прописать в readme.md логику работы Вашего приложения. readme.md должен быть написан строго на английском языке.
+This application is a simple Python-based GUI tool that fetches and displays various types of textual content (like jokes, verses, and toasts) from specified URLs. It's built using the Tkinter library and demonstrates basic network communication, XML parsing, and GUI capabilities in Python.
 
+## Installation
 
-## Второй вариант задания
-1. Реализуйте логику построения социального графа для пользователя Github, основываясь на готовом fastAPI;
-2. Задокументируйте запросы Вашего сервиса в Postman, прикрепите ссылку на workspace в readme.md;
-3. Пропишите в readme.md логику изменений, которые Вы внесли в исходное приложение. readme.md должен быть написан строго на английском языке.
-4. Добавьте минимум два собственных endpoint, которые будут участвовать в работе приложения;
-5. Модифицируйте или замените существующий frontend. frontend может быть написан не только на JS. Это может быть, например, скрипт на python, который с помощью HTTP запроса будет обращаться к Вашему backend-приложению и строить визуализацию графа по полученным данным.
+To run this application, you need to have Python installed on your system. Python 3.x is recommended. This application also requires external libraries such as `requests` and `xmltodict` for network requests and XML parsing, respectively.
 
+### Steps to Install Python
 
-## Третий вариант задания
-1. Модифицируйте существующее backend-приложение для работы с существующей реализацией frontend;
-Существующая реализация frontend работает со следующими значениями из получаемого от backend ответа:
-- login: имя пользователя
-- followers: список фолловеров пользователя (могут содержать вложенные поля followers)
-- avatar_url: картинка, которую отображать вместо квадратика
-- size: размер иконки (можно модифицировать, основываясь на знаниях о пользователе)
+1. Download Python from the official website: [Python Downloads](https://www.python.org/downloads/).
+2. Follow the installation instructions for your specific operating system.
 
-Необходимо получить для каждого followera исходного пользователя всех его follower-ов и добавить их в ответ в соответствющие поля.
+### Setting Up the Application
 
-Необходимо вычислить значение size для каждого из пользователей(запрашиваемый пользователь, его фолловеры, и все фолловеры фолловеров, ...). Вычислять размер иконки можно на основании его активности в последнее время, количества репозиториев, других параметров.
+1. Clone the repository or download the source code to your local machine.
+2. Open your terminal or command prompt.
+3. Navigate to the directory where the application is stored.
+4. Install required dependencies by running:
 
-2. Задокументируйте запросы Вашего сервиса в Postman, прикрепите ссылку на workspace в readme.md;
+   pip install requests xmltodict
 
-3. Добавьте минимум два собственных enpoint. Они могут не участвовать в логике frontend приложения, но должны быть задокументированы;
+## Configuration
 
-4. Пропишите в readme.md логику изменений, которые Вы внесли в исходное приложение. readme.md должен быть написан строго на английском языке;
+Before running the application, ensure the URLs in the `send_request_and_display_response` function are set to your desired endpoints. These URLs are where the application fetches the textual content.
 
-## Материалы
-* [Документация GitHub API](https://docs.github.com/en/rest/users/followers) (в коде используется запрос "List followers of a user")
-* [Postman](https://www.postman.com/) (для генерации ссылки нажмите share для желаемого workspace и сгенерируйте JSON-ссылку)
+## Usage
 
+To run the application, execute the main Python script. If your file is named `main.py`, use the following command:
 
-## Запуск приложений из репозитория
-* Склонируйте репозиторий
-### Backend
-* Создайте и **активируйте** виртуальное окружение для проекта 
-* Пройдите в корень проекта и установите зависимости с помощью команды pip install -r requrements.txt
-* Запустите в окружении main.py (Обратите внмание, что по умолчанию сервер должен подняться по адресу http://localhost:5000/, в противном случае дефолтный фронтенд не сможет найти его)
-### Frontend
-* Пройдите в папку frontend
-* Установите зависимости с помощью команды npm install
-* Запустите web сервер с помощью команды npm run start:dev. Сервер поднимется по адресу: http://localhost:9000/
+python main.py
 
+This will open a GUI window with buttons to fetch different types of content. Click on the desired button to fetch and display the content.
 
+## Application Logic
 
-### Настройка репозитория
-Сделайте свою копию репозитория. Как это сделать, описано [тут](https://gist.github.com/0xjac/85097472043b697ab57ba1b1c7530274) или [тут](https://stackoverflow.com/questions/10065526/github-how-to-make-a-fork-of-public-repository-private). Или можно создать чистый репозиторий самостоятельно и залить код туда.
+- **GUI Creation**: The application uses Tkinter to create a simple GUI with buttons and a text display area.
+- **Network Requests**: Upon clicking a button, the application sends a GET request to the predefined URL.
+- **Response Handling**: The received response is displayed in a new window. If the response is in XML format, it's parsed before being displayed.
+- **Error Handling**: In case of network errors or issues with the request, an error message is displayed.
 
-Если создаете приватный репозиторий, ответным письмом будет отправлен логин преподавателя, которого нужно добавить в коллабораторы.
+## Postman Link
 
-### Отправка задания
-Выполните задания, сохраните изменения, сделайте commit и push в свой репозиторий.
-
-Напишите на почту apicourse@yandex.ru письмо с темой вида MiniLab224 ФИО группа с просьбой проверить работу. В письме должна быть ссылка на репозиторий с выполненной работой, проверяться будет версия, которая лежит в ветке main. В ветке main не должно быть файлов и папок с русскими названиями!
-
-### Дедлайн
-**Дедлайн:** 23:59 18/11/2024 (18 ноября).
+https://www.postman.com/joint-operations-saganist-46223840/sergey/collection/f0sktzv/numbers
